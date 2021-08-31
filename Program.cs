@@ -100,8 +100,22 @@ namespace MSISDN
             subA.Display();
             subB.Display();
 
+            Console.WriteLine();
+            Console.WriteLine("for A to B press 1, or press 2 for vice versa ");
+            int direction = Convert.ToInt32(Console.ReadLine());
+
             Operation operation = new Operation();
-            operation.StartCall(subB, subA);
+
+            if (direction == 1)
+            {
+                Console.WriteLine("A calling B....");
+                operation.StartCall(subA, subB);               
+            }
+            else
+            {
+                Console.WriteLine("B calling A....");
+                operation.StartCall(subB, subA);                
+            }                       
 
             Console.ReadKey();
         }
