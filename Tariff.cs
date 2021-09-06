@@ -10,17 +10,10 @@ namespace MobileCallSimulation
     {
         public Tariff()
         {
-        }
-
-        public Tariff(string name)
-        {
-            PackageName = name;
-        }
-
-        public Tariff(string name, double talk)
-        {
-            PackageName = name;
-            PriceForTalikngMinute = talk;
+            PackageName = "BASIC";
+            PriceForTalikngMinute = 0.02;
+            PriceForSmsSending = 0.02;
+            PriceForOneMegabyte = 8.00;
         }
 
         public Tariff(string name, double talk, double sms, double priceForOneMegabyte)
@@ -53,12 +46,6 @@ namespace MobileCallSimulation
                     PriceForSmsSending = 0.07;
                     PriceForOneMegabyte = 5.00;
                     break;
-                //case 4:
-                //    PackageName = "BASIC";
-                //    PriceForTalikngMinute = 0.02;
-                //    PriceForSmsSending = 0.02;
-                //    PriceForOneMegabyte = 8.00;
-                //    break;
                 default:
                     break;
             }

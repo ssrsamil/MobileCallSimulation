@@ -9,13 +9,16 @@ namespace MobileCallSimulation
 {
     class Operation
     {
-
         static bool checkpoint = false;
         public object TarifPackage { get; private set; }
 
-        public void StartCall(Subscriber A, Subscriber B)
+        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
-
+            e.Cancel = true;
+            checkpoint = true;
+        }
+        public void StartCall(Subscriber A)
+        {
             double pricePerSecond = A.TarifPackage.PriceForTalikngMinute / 60.0;
 
             if (A.TarifPackage.PackageName == null)
@@ -39,10 +42,10 @@ namespace MobileCallSimulation
                 while (!checkpoint && currentBalance >= duration * pricePerSecond)
                 {
                     Thread.Sleep(1000);
-                    duration++;                 
+                    duration++;
                 }
-              
-                A.MinusBalance(duration * pricePerSecond);
+
+                A.AdjustBalance(- duration * pricePerSecond);
 
                 TimeSpan seconds = EndCall(fromDate);
                 double result = seconds.TotalSeconds * pricePerSecond;
@@ -50,13 +53,6 @@ namespace MobileCallSimulation
                 CallDurationDisplay(seconds, result, A);
             }
         }
-
-        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
-        {
-            e.Cancel = true;
-            checkpoint = true;
-        }
-
 
         public TimeSpan EndCall(DateTime fromDate)
         {
